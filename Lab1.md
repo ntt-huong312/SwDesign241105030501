@@ -21,7 +21,7 @@
   +  **Base Reuse Layer (Tầng Tái sử dụng Cơ sở):** Đây là tầng bổ sung, cung cấp các dịch vụ, hàm tiện ích và thư viện dùng chung mà tất cả các tầng khác có thể sử dụng. Các chức năng trong Base Reuse Layer thường bao gồm các công cụ hỗ trợ, chức năng chung không phụ thuộc vào logic nghiệp vụ như xử lý định dạng ngày tháng, mã hóa, log hệ thống, và các hàm tiện ích khác.
  
 - **Biểu đồ:**
-  ![Diagram](https://www.planttext.com/api/plantuml/png/T991JW8n58RtFSKBUox0mW0InKYYKLmOmwAM9pIC7MrVKM9SkN3X0Jm0CIOcnlqqX0KdwGcyWfr1mXInYwPfl-_rVqs_tRnkY6kormbZPYGLwDGW8qa9Waclw8vh1Ax5K18AiXhP3HSZFa2e76iqg8YJJ1Lq-0Hr1HuOX75nTj1RBdPJHJfD4jGzziZMRjCQgT0OwAG3AJRiKzHZAJ0sMfmuD8Gef0XlDOv-RykPIsusp6ROWHEqOTv8IJAHD84zgqJUX2cyF3nKgpjHUAZ1ldUV4lhUVK4YlNksB08AOvKyuEUB3ml2P-yMxeC9oMB6rkS5dGUFoQXwSRm4Ltq5kglj1CO-UrEij5-krzK-c_vNgfHm2nVdY_i_zDcSuDO6QKld-QFLe1tgF2cWeNSlC2e9RCjZ_mdKzkuLI7itPNLK_VnF_W000F__0m00)
+  ![Diagram](https://www.planttext.com/api/plantuml/png/T991IWCn58RtESMZ-rwW2sbhqOe5YzQ5I1Sn3Mrep6ZoKXp4bGiN7i035144SJz1kkX9SWAlO3ArT5BhB8OX-Ru__mlpxHPDWrIZlPQ4cAbGe3F32GgK7FeqrvcKqD9i8f0pj9gJ6ygcTCoXrjVSS8KKHQQWHtEkQt1F83oNvqV3rST-fZ16S3qa3sJZjgqHYXi3lMmis9PznlLCC9uQ7OeKMeoLKe9tMYU_fqNcYfejinrMu9JRyDvgYK8ApE70AXQ7CAKNoqEzlfUKXmOSUlSXOEJT9qZXtPCb2L0Qw-O1lrY-Ms2-UBDm5qoGoo-osI_fM3mba_HoUmMkvmhqGDiSPhvuLQIoNiqRQ5_C_ukgDDp1fVtI-OzziK2ujK7QCNcyj0PqGywZ0fnuzmpJYa1sNFQVGbtlNW2rTtFIv6eKVyaV0000__y30000)
 ## 2. Cơ chế phân tích
 - **Persistency** _(Cơ chế bền vững)_: Hệ thống cần đảm bảo mọi dữ liệu được ghi nhận (thông tin nhân viên, thời gian làm việc, thông tin lương) được lưu trữ bền vững trong database. Việc này giúp bảo vệ dữ liệu khỏi mất mát và đảm bảo có thể truy xuất lịch sử thông tin khi cần thiết.
   
