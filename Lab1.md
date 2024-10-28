@@ -36,5 +36,60 @@
 - **Legacy Interface** _(Cơ chế giao tiếp với hệ thống đã tồn tại)_: Hệ thống mới cần có khả năng giao tiếp với cơ sở dữ liệu hiện có (Cơ sở Dữ liệu Quản lý Dự án) mà không làm thay đổi hoặc làm mất dữ liệu hiện tại. Điều này giúp tối ưu hóa chi phí và thời gian triển khai hệ thống mới.
 
 ## 3. Phân tích ca sử dụng Payment
+### 3.1. Xác định các lớp phân tích
+- **Boundary**:
+  + **EmployeeUI:** Làm nhiệm vụ tương tác với nhân viên và hệ thống, giúp nhân viên chọn phương thức thanh toán.
+- **Control**:
+  + **PaymentController:** Quản lý thao tác liên quan đến việc chọn phương thức thanh toán.
+- **Entity:** Đại diện cho thông tin của nhân viên trong hệ thống, chứa thông tin cá nhân và các thuộc tính liên quan đến phương thức thanh toán.
+    
+### 3.2. Biểu đồ Sequence
+![Diagram](https://www.planttext.com/api/plantuml/png/X98_IWGn5CRxdE9Tm0i88mk3_v05GImiOoRi138l8PjHfhQm40jF8AE5kB1WORLJM4Js7Zc1L_15TtMdcMqIyl9-x_loaQ_kOpJrtFcwqemBRnpiLrQRHahWKv2CNPeQ2-wQl_hvSRgf5HC6lJCQJdbJIVJvxr5Bb-wjO5HJlkdFgonZMGPdKalXroICfIzD0GVQN4EMCIPXPuyKO1V6iNk4YU862XMxMmHHnkuUmPRBjsMB4_1qVXMqSIp1cz0Y8v1mAmY_2BCQH5oyq1fQCOWn8eWZYmIUaDfD1TvnwWdlYL08M8OdX2iLPglsjSsZr8u_K--sA_q_Bz_-cXHN7XTpI-gq-Kq_0rpASIE8mzZDrM3_vqDuNgNRIwAdFMXq9B58t-WR003__mC0)
+### 3.3. Biểu đồ lớp
 ## 4. Phân tích ca sử dụng Maintain Timecard
+### 4.1. Xác định các lớp phân tích
+- **Boundary**:
+  + **EmployeeUI:** Làm nhiệm vụ tương tác với người dùng và hệ thống, giúp nhân viên nhập dữ liệu vào hệ thống và xác nhận gửi thông tin chấm công.
+  
+- **Control**:
+  + **TimecardController:** Quản lý thao tác liên quan đến phiếu chấm công, gồm việc tạo phiếu chấm công mới, xử lý yêu cầu cập nhật giờ làm, kiểm tra số giờ hợp lệ, xác thực trước khi nộp phiếu chấm công.
+    
+- **Entity**:
+  + **Timecard:** Đại diện cho thông tin chấm công của nhân viên trong kỳ trả lương, gồm ngày làm việc, giờ làm việc, mã thanh toán, trạng thái phiếu chấm công.
+ 
+  + **Employee:** Đại diện cho nhân viên, chứa thông tin cá nhân và phân quyền trong hệ thống.
+ 
+  + **ChargeNumber:** Đại diện cho mã thanh toán, xác định các dự án mà nhân viên có thể tính giờ làm việc của họ.
+
+### 4.2. Biểu đồ Sequence
+![Diagram](https://www.planttext.com/api/plantuml/png/V9FFIWCn4CRlUOfv0Lz0M2ai_aFRanuyfjcm2MoI9SrMUlRWGNm03yKM4K4eU124tKCF2xv7di1NCCdQTjLj3tkOcUytcVc6_QgMlP71sXGYGvWOfU5Gv9cQK0fu11IXeIfaWlLadRyyzPM28wAaqIg32ouemJg9cpYZsWiCGLGQRYRhUiYkaZ73EgM3GWmREP48HH7qCPV6VHleA5FN44K8KTWxSC_2FlHjzGWfnmeIRgjR2PBPSf63ORQQSb-HaDKp0MDV9iX13ZN4eLVrQm74bYy5v8pRSkaY1pyB8FMxJ84r3OqjvnmXXtZGSMSkVoF0QDp9jPJdBZi1fcpvGK8VjOiWSeqaM38OrNF2GDHFRXaV6rNFPT2kbZ_nayYmwzqknhivQ7n97J9jE-BztDZve_hJ0CRrx3_PzlBOLWlU8Tbu4OV6uJgcsuKmfQqUykvp_9epTYlVksDlbMyvT03Q5_fywxu-GZqg4_ydV0C00F__0m00)
+
+### 4.3. Biểu đồ lớp
+#### 4.3.1 Phân tích và quan hệ giữa các biểu đồ
+- **Employee UI:**
+  + Thuộc tính: currentEmployee, currentTimecard
+  + Phương thức: displayTimecard(), submitTimecard(), showError()
+
+- **TimecardController:**
+  + Thuộc tính: timecardRepository, chargeNumberRepository
+  + Phương thức: getCurrentTimecard(employeeId), validateAndSave(timecard), submitTimecard(timecard)
+ 
+- **Timecard:**
+  + Thuộc tính: timecardId, employeeId, workHours, chargeNumbers, startDate, endDate, status
+  + Phương thức: addWorkHours(date, hours, chargeNumber), setSubmitted(date)
+
+- **Employee:**
+  + Thuộc tính: employeeId, name, paymentType
+  + Phương thức: getPaymentDetails()
+ 
+- **ChargeNumber:**
+  + Thuộc tính: chargeNumberId, projectName
+  + Phương thức: validateChargeNumber(chargeNumber)
+ - Giải thích:
+   + EmployeeUI tương tác trực tiếp với TimecardController để hiển thị và lưu phiếu chấm công.
++ TimecardController sẽ tương tác với Timecard để lấy hoặc tạo phiếu chấm công, và kiểm tra các mã thanh toán hợp lệ từ ChargeNumber.
++ Timecard liên kết với ChargeNumber để xác định dự án tương ứng với giờ làm việc của nhân viên.
++ Employee có mối quan hệ với Timecard để xác định phiếu chấm công nào là của ai, và cũng xác định phương thức thanh toán cho nhân viên.
+
+
 ## 5. Hợp nhất kết quả
