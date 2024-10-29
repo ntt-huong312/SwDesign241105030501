@@ -37,121 +37,169 @@
 
 ## 3. Phân tích ca sử dụng Payment
 ### 3.1. Xác định các lớp phân tích
-- **Boundary**:
-  + **EmployeeUI:** Làm nhiệm vụ tương tác với nhân viên và hệ thống, giúp nhân viên chọn phương thức thanh toán.
-- **Control**:
-  + **PaymentController:** Quản lý thao tác liên quan đến việc chọn phương thức thanh toán.
-- **Entity:** Đại diện cho thông tin của nhân viên trong hệ thống, chứa thông tin cá nhân và các thuộc tính liên quan đến phương thức thanh toán.
+- **Boundary**: 
+   - **PaymentForm**: Giao diện người dùng cho nhân viên, cho phép họ chọn phương thức thanh toán.
+     
+- **Control**: 
+   - **PaymentController**: Thành phần điều khiển xử lý logic, nhận yêu cầu từ **PaymentForm** và quản lý thông tin thanh toán.
+
+- **Entity**: 
+   - **EmployeeDatabase**: Cơ sở dữ liệu lưu trữ thông tin về nhân viên, bao gồm phương thức thanh toán và thông tin cá nhân.
     
 ### 3.2. Biểu đồ Sequence
-![Diagram](https://www.planttext.com/api/plantuml/png/b98zJWCn48Lxdy9AjIcum1Oe_1KKY4WH1p2U2R6mFMOyYxHde-18N047bWrcjGhfREkzzxsn_V7slifYMBhWbR52h6z2yjGZgaVg8XZknvE7MsKf2fFNQzC7Z7BrlVN8gkoS7BHA_QpqsVclX5Pdz6Xb2BX3sH4qItLGxFMJ-5O_OUsvJ-8evcATYFyImUNaJJzZd-jfTqGPJ-wPc2pcNFasNoCNth6shUuI69bG_pjY4MmT1pEmghOLXl6bmomN05pADalTkArU1EFyOdWWXFchAJE-Ei3HVHnqQUBpDKh97s7Wk60qOABiv0HibQLM667_UJy1003__mC0)
+![Diagram](https://www.planttext.com/api/plantuml/png/b9C_JiCm58Ttd-9TW0ime4hXtm0I0mECZckHICbpv3f8cHaH0oUW0I54HIK6fcHWCEezV0Akm7DBcmIf9Psiv-ZtwVU-9D_rvs1ak3PvcZ0kZD9ma6Q9AgHaeSfno7K1Pxn89Pf3fLCc51gjakLTi1WJgHcZCJR5Ah_F3G_vI3Asl86TlJOBTk7KrG-GsZ52PDym0X6v-WuXYsRlinAlmD3yAkZWzD0eMo9h0nfUquEebtQIWt3LIzw7r8eIxszxmfsuwhcWfFtmd1W18_k8S1tRoHf8TydZsDKtE6zm2yAMOflzLkuwQ_Nmj5vwy7-uZ-KZLq_ZjfOM0BxkxTDlozwU0rTDCv9BXzd-nNLtlF2QvoZqoXekzHtx3ysttk3wVB5MQ4kr8J-GEFG_pWy0003__mC0)
 ### 3.3. Biểu đồ lớp
-![Diagram](https://www.planttext.com/api/plantuml/png/V99BJiCm48RtESKiGKek4A6g4cA112rInG5SUoWMVk4PBoB4oLXm9Aw0arfH7WNlx6yU__pZdw_lBR68dAoff154S6U3yHqYV5IGJmDQjQ0TbviJ5biuSDJkL9w2w2mwVaH-zMh1X58HYHQlH-7UTkj2GagV7E-IFM8SsG0120rAVfhskhekB0Kb69ViirgCz7nVXWA8-9wG_YYdD0KZkWBtWRLtDD8Jyc7GWkhVz5llNdIqei-UgYb96NFqnc0SHUNAiugvPmiFclZcRCMcn8NePJPr5dkMrBUoiptKonNKA_VhoyOFaYVMDStcWlOM4Y5LQz27Zt-fBIkYQejEzP_j5m00__y30000)
+![Diagram](https://www.planttext.com/api/plantuml/png/j591JiCm4Bpx5QkUKebKuff3LOc2r0C2gV00usnRIuvjl1jGX7WP1vx45t1C32dDjKVlpCxixFhhutD5B0EtZH7AI2AuRhnn7IAy2O0IS7XkrXLeowbcPOCLR3bekqy5Bxi6BJzqVbm783Ie-Fu7lKK-kBgOYtSnM0t0ZGjDSWEeDNaZkm6uywoTfTZIOtlCIjia6w5YVcIddDtfq3pwMZ9E65qvoy4PWs6mYv8vxiRkNF4lR5JFSAAtIVWuJcxvervChMCqJEQj9SidIJZC4Z0IyGKpVEvXVkyykvn1MIwFhf4SCKZ51A-Q3s8CBXRBYOrMyTgsffZZkKMAVUp4AQllFLb01L8f948IOXL5-i_u3G00__y30000)
 
-**Giải thích**
+---
+#### Lớp `Employee`
 
-#### Lớp Employee
-- **Mô tả:** Đại diện cho thông tin của nhân viên trong hệ thống.
-- **Thuộc tính:**
-  + id: Mã định danh duy nhất cho mỗi nhân viên, dùng để phân biệt giữa các nhân viên khác nhau.
-  + name: Tên của nhân viên, giúp người dùng nhận diện.
-  + paymentMethod: Phương thức thanh toán hiện tại của nhân viên, có thể là "pick up", "mail", hoặc "direct deposit."
-  + address: Địa chỉ mà séc sẽ được gửi đến nếu nhân viên **chọn phương thức** ***"mail"***
-  + bankName: *Tên ngân hàng* được chỉ định nếu nhân viên chọn phương thức ***"direct deposit"***
-  + accountNumber:*Số tài khoản ngân hàng* của nhân viên để thực hiện chuyển khoản nếu chọn ***"direct deposit"***
-- **Phương thức:**
-  + selectPaymentMethod(): Cho phép nhân viên chọn phương thức thanh toán mong muốn.
-  + updatePaymentMethod(): Cập nhật thông tin phương thức thanh toán của nhân viên trong hệ thống.
-  ---
-#### Lớp EmployeeUI
-- **Mô tả:** Đại diện cho giao diện người dùng nơi nhân viên tương tác với hệ thống.
-- **Phương thức:**
-  + requestPaymentMethod():Yêu cầu nhân viên chỉ định phương thức thanh toán mà họ muốn.
-  + displayPaymentOptions(): Hiển thị danh sách các phương thức thanh toán có sẵn để nhân viên lựa chọn.
-  + getSelectedPaymentMethod(): Lấy phương thức thanh toán mà nhân viên đã chọn sau khi họ đã thực hiện lựa chọn.
-  + displayConfirmation(): Hiển thị thông báo xác nhận cho nhân viên sau khi họ đã chọn phương thức thanh toán.
-  ---
-#### Lớp PaymentController
-- **Mô tả:** Quản lý logic liên quan đến lựa chọn phương thức thanh toán.
-- Phương thức:
-  + getPaymentMethods(): Trả về danh sách các phương thức thanh toán có sẵn mà nhân viên có thể chọn.
-  + processPaymentMethodSelection(method, address, bankName, accountNumber): Xử lý lựa chọn của nhân viên, kiểm tra tính hợp lệ và cập nhật thông tin vào lớp Employee.
+- **Mô tả**: Lớp `Employee` đại diện cho nhân viên trong hệ thống, bao gồm các thuộc tính cơ bản và phương thức để chọn phương thức thanh toán.
+- **Thuộc tính**:
+  - `employeeID`: ID của nhân viên.
+  - `name`: Tên của nhân viên.
+  - `paymentType`: Phương thức thanh toán đã chọn của nhân viên, chẳng hạn "PickUp", "Mail", hoặc "DirectDeposit".
+- **Phương thức**:
+  - `selectPaymentMethod()`: Cho phép nhân viên chọn một phương thức thanh toán.
 
-  #### Giải thích quan hệ
-- EmployeeUI sử dụng PaymentController để:
-  + Lấy danh sách các phương thức thanh toán có sẵn (thông qua getPaymentMethods()).
-  + Gửi yêu cầu cập nhật thông tin phương thức thanh toán cho lớp Employee thông qua lớp PaymentController.
-- PaymentController cập nhật thông tin cho Employee khi nhận được lựa chọn từ giao diện người dùng và xử lý logic nghiệp vụ.
+#### Lớp `PaymentForm`
+
+- **Mô tả**: Lớp `PaymentForm` đại diện cho biểu mẫu nơi nhân viên thực hiện thao tác chọn phương thức thanh toán.
+- **Phương thức**:
+  - `displayPaymentOptions()`: Hiển thị các phương thức thanh toán khả dụng.
+  - `getPaymentSelection()`: Nhận lựa chọn phương thức thanh toán từ nhân viên và trả về một chuỗi (`String`) biểu diễn phương thức đó.
+  - `confirmUpdate()`: Xác nhận lại việc cập nhật phương thức thanh toán đã hoàn tất.
+
+#### Lớp `PaymentController`
+
+- **Mô tả**: Lớp `PaymentController` xử lý logic của hệ thống khi nhân viên chọn phương thức thanh toán.
+- **Phương thức**:
+  - `getEmployeeInfo(employeeID: int)`: Lấy thông tin nhân viên từ `EmployeeDatabase` dựa trên `employeeID`.
+  - `updatePaymentMethod(employee: Employee, paymentType: String)`: Cập nhật phương thức thanh toán của nhân viên trong cơ sở dữ liệu.
+
+#### Lớp `EmployeeDatabase`
+
+- **Mô tả**: Lớp `EmployeeDatabase` đóng vai trò là cơ sở dữ liệu, lưu trữ và quản lý thông tin của nhân viên.
+- **Phương thức**:
+  - `retrieveEmployee(employeeID: int)`: Truy xuất thông tin nhân viên từ cơ sở dữ liệu dựa trên `employeeID`.
+  - `updatePaymentMethod(employee: Employee, paymentType: String)`: Cập nhật phương thức thanh toán của nhân viên trong cơ sở dữ liệu.
+
+#### Giải thích quan hệ
+ - **Employee → PaymentForm**: Nhân viên (Employee) mở giao diện thanh toán (PaymentForm) để chọn phương thức thanh toán. Nhân viên tương tác với giao diện này để thực hiện các thao tác như chọn phương thức thanh toán.
+
+- **PaymentForm → PaymentController**: Giao diện thanh toán (PaymentForm) gửi yêu cầu đến bộ điều khiển thanh toán (PaymentController) để lấy thông tin nhân viên và xử lý các hành động liên quan đến việc chọn phương thức thanh toán.
+
+- **PaymentController → EmployeeDatabase**: Bộ điều khiển thanh toán (PaymentController) truy cập vào cơ sở dữ liệu nhân viên (EmployeeDatabase) để lấy thông tin nhân viên và cập nhật phương thức thanh toán của họ.
   
 ## 4. Phân tích ca sử dụng Maintain Timecard
 ### 4.1. Xác định các lớp phân tích
-- **Boundary**:
-  + **EmployeeUI:** Làm nhiệm vụ tương tác với người dùng và hệ thống, giúp nhân viên nhập dữ liệu vào hệ thống và xác nhận gửi thông tin chấm công.
-- **Control**:
-  + **TimecardController:** Quản lý thao tác liên quan đến phiếu chấm công, gồm việc tạo phiếu chấm công mới, xử lý yêu cầu cập nhật giờ làm, kiểm tra số giờ hợp lệ, xác thực trước khi nộp phiếu chấm công.
-- **Entity**:
-  + **Timecard:** Đại diện cho thông tin chấm công của nhân viên trong kỳ trả lương, gồm ngày làm việc, giờ làm việc, mã thanh toán, trạng thái phiếu chấm công.
-  + **Employee:** Đại diện cho nhân viên, chứa thông tin cá nhân và phân quyền trong hệ thống.
-  + **ChargeNumber:** Đại diện cho mã thanh toán, xác định các dự án mà nhân viên có thể tính giờ làm việc của họ.
+- **Boundary**: 
+   - **TimecardForm**: Giao diện người dùng cho nhân viên, cho phép họ mở thẻ chấm công, nhập giờ làm việc và nộp thẻ chấm công.
+   - **Project Management**: Actor cung cấp danh sách mã dự án cho **TimecardController**, giúp nhân viên ghi nhận giờ làm việc cho các dự án phù hợp.
+
+- **Control**: 
+   - **TimecardController**: 
+     - Thành phần điều khiển logic, xử lý yêu cầu từ **TimecardForm**, lấy thẻ chấm công hiện tại, cập nhật giờ làm việc và lưu thẻ chấm công.
+
+- **Entity**: 
+   - **Timecard**: 
+     - Thực thể lưu trữ thông tin thẻ chấm công, bao gồm ngày, giờ làm việc và mã dự án.
+   - **Employee**: 
+     - Thực thể đại diện cho nhân viên, lưu trữ ID và tên của họ.
 
 ### 4.2. Biểu đồ Sequence
-![Diagram](https://www.planttext.com/api/plantuml/png/T991JiCm44NtFiLSW0iW1LKgHM81I2qzWEjCYLN7JiVZLZaR2ux45HWdRUCWM7ZX-M_yvu_y_VcrYAo9K-kKDXm8LctdGey8EW8gjGl9rvhwMttxd9LabGcUAJXujoqQJVLol3ka3B1HwDboVzE7whMuR3Hzu6jgToDkl59L1I_QUfOpDJsvS8QgKWhXxa5iuHxUElHm3dI09YIIASMt1sb4sck3IY11sGYwncF2o60IaM30bsUL4Zb3mYmRD8T9cOGrCbay8SXM3A5c_4qPNsBEYbFOWncoWH_2nG6zZlveO-Tq_n-QLx3AESfu4dxAFggpDj2-BlWo_YRjMikbEANRTlKiKVQ-yDVQt7g33Wr3d3D_RNj0OhJ15tuRVIhT5kZh_Eb-0000__y30000)
+![Diagram](https://www.planttext.com/api/plantuml/png/d9G_JiCm5CPtd-AfEnTWG9NAFmcA63h0w3fM4nJRbMCZCZCmS086H2k4a12LG6Ag1uP8tCCdu0euRTCs8auXIoHRx_lbUzzxoRVvR2SAIwLPZ31HGi8U6yOYfHJrXUO1bYdq8aO9bi6-a0mHmPKKyVAoCp_7L2BALQHMvSMvLH1RW1DOuvvASK69wcAE1vIvwbsiS1ydTE6ajIY0LSKCyKk7KF4AsDefsOLjw5hp02mRSGYpLnw22ktK077F9mOa--03L5Ai4LQzESwn4wGLQWWZQsuuA3iTHwX2we3KwOzSsJK39N53I77xRo-rRHtcjdZEChTrsPIzU4UtD1TWbtMIZKdemd-4m9ftoCOS-PLLM8VhIPt2bNPGjO7axV70cadaTLIVzcABIZ6Lv7MxT-AId0nXuCJt46SZ1fVvWCZVHjEPYNdEK3KCxvQKz1MZhND-dhre87Rwh27-UjFDlveDOl-AUuIrSLjpDsnizSojnZmj3ZmdDJVPfZp8_wW_0000__y30000)
 ### 4.3. Biểu đồ lớp
-![Diagram](https://www.planttext.com/api/plantuml/png/f9DBJiCm48RtEOMNGMel4A6ggAr49M1J46it7hLM7JlCZ2jLY9Enu4XS0STvo85qHHQMFC_l7q--Fx-Mn1BPLoRBIYE9nAQgZRi0l6p5UoR2vsgmhmvFzyuZRIpZ9R-93gMfDlAoEaeym9Elze2K6qrSY8TmtgQEHPj2Vbzf7ghbPH9IY1sZjeUPE3Q-GgoTtnje4n7UF13lcdmYxMnW-EYHdtK5fKIrSe7E6GCOqUU2EqSnXCHY1-2LHmJBlJc7JlLMzHXztt21Cun5_bCCoJCCdITqTFHwO8dNluZH7DzlBHb2Zt2seLRzieGezZIkPnjfmVOewz5RpJhOHOILIbsJE4wQ45f9FDrHV3HcKDtSpj9e5S3Qaed-j5utWz8f654he19rpM451diea6pjVBwOs8XiOadIo6l-b2bRXi4slyeF0000__y30000)
-
-#### Sơ đồ Lớp "Maintain Timecard"
-
-#### Class EmployeeUI
-- **Mô tả**: Giao diện người dùng
-- **Phương thức**:
-  - openWorkHoursEntry(): Mở giao diện để nhân viên nhập giờ làm việc.
-  - displayChargeNumbers(list: List<ChargeNumber>): Hiển thị danh sách các mã thanh toán có sẵn cho nhân viên lựa chọn.
-  - submitWorkHours(chargeNumber: String, hours: Double): Gửi giờ làm việc đã nhập đến TimecardController.
-  - requestSubmission(): Yêu cầu nộp phiếu chấm công sau khi hoàn thành việc nhập giờ làm.
+![Diagram](https://www.planttext.com/api/plantuml/png/X5HDImCn4BtlhvXZ2oszBr8ghQ9WHQZWURePs-WcMIRPbYB-CW_-9F-2IVQZkwt5Is0dRsRUUpFPdw_lcNN8hbHvakLeBToe8ZS78lX80CP0zUVz8WMfNOnfL9J2oh7K6ny0C0NfPwaeGnQtXjLW6CEa7V6TATc-67udKOTjkLRIDNWV_4pgtjqQiJ-0aBR8yT11XwZKHUbYvS4mXPsHeggCEpeYEnUPqQ-IrIfqjbOQtK_RclqJcpVAtDm8ieCid2ayIEkkAfdJ1d_6jVOfkhX0vuq9P-MT5YUHxT6C59PON8MRKJ1s2Z2PU4yDawrWi8yuA8X1u27c5pNBBVA67akr9ZxX6GMX49Kvecq_geh68PvQrZSZJcTmKU_SQCScppshQa8RSlEIsG-xjRvPchJT9b-kkOr9PH6eLIHTVN64ZE1_uZlCPK1TQx4A6iwhUFJQc9nGnmGcxn3jg3VfuObxhTmQjKID6r9UdEU2QxHKgswgzKRnLxdsFOt7q_w2f_7TsAGNxA8wLaVvn9WvlnVIRPC_CDrKdw0YTNi9ULbWsegppS91V179p6zq-5Fy0W00__y30000)
 
 ---
 
-#### Class TimecardController
-- **Mô tả**: Điều khiển (Control)
-- **Thuộc tính**:
-  - timecard: Timecard: Tham chiếu đến phiếu chấm công hiện tại.
-- **Phương thức**:
-  - getCurrentTimecard(employeeId: String): Lấy hoặc tạo phiếu chấm công hiện tại cho nhân viên dựa vào ID của họ.
-  - retrieveChargeNumbers(): Lấy danh sách các mã thanh toán từ hệ thống Quản lý Dự án.
-  - submitWorkHours(chargeNumber: String, hours: Double): Kiểm tra và cập nhật giờ làm việc trên phiếu chấm công.
-  - saveTimecard(): Lưu và nộp phiếu chấm công, sau đó đánh dấu phiếu ở trạng thái chỉ đọc.
+#### Lớp Employee:
 
----
+- **Thuộc tính:**
+  - **employeeID**: ID của nhân viên.
+  - **name**: Tên của nhân viên.
 
-#### Class Timecard
-- **Mô tả**: Thực thể (Entity)
-- **Thuộc tính**:
-  - id: String: Mã định danh duy nhất cho phiếu chấm công.
-  - employeeId: String: ID của nhân viên gắn với phiếu chấm công.
-  - startDate: Date: Ngày bắt đầu của kỳ trả lương.
-  - endDate: Date: Ngày kết thúc của kỳ trả lương.
-  - status: String: Trạng thái của phiếu chấm công (ví dụ: "đã nộp", "bản nháp").
-  - entries: Map<ChargeNumber, Double>: Bảng ánh xạ giữa mã thanh toán và giờ làm việc đã ghi nhận.
-- **Phương thức**:
-  - addWorkHours(chargeNumber: ChargeNumber, hours: Double): Thêm giờ làm việc vào phiếu chấm công.
-  - markAsSubmitted(): Đánh dấu phiếu chấm công là đã nộp và chuyển về trạng thái chỉ đọc.
-  - validateHours(): Xác minh rằng giờ làm việc được nhập phù hợp với giới hạn cho phép.
+- **Phương thức:**
+  - **openTimecardForm()**: Mở màn hình thẻ chấm công.
+  - **enterHoursWorked()**: Nhập giờ làm việc vào thẻ chấm công.
+  - **submitTimecard()**: Nộp thẻ chấm công.
 
----
+#### Lớp TimecardForm:
 
-#### Class ChargeNumber
-- **Mô tả**: Thực thể (Entity)
-- **Thuộc tính**:
-  - code: String: Mã định danh duy nhất cho mã thanh toán.
-  - description: String: Mô tả về dự án hoặc nhiệm vụ liên quan đến mã thanh toán.
-- **Phương thức**: Không yêu cầu phương thức
+- **Phương thức:**
+  - **displayTimecard()**: Hiển thị thẻ chấm công hiện tại.
+  - **inputHours()**: Nhận dữ liệu giờ làm việc từ người dùng.
+  - **saveTimecard()**: Lưu thẻ chấm công vào hệ thống.
+  - **confirmSubmission()**: Xác nhận việc nộp thẻ chấm công.
+  - **showProjectCodes(codes: List<String>)**: Hiển thị danh sách mã dự án.
 
-#### Giải thích quan hệ
-- **TimecardUI** sử dụng **TimecardController** để:
-  - Lấy thông tin phiếu chấm công hiện tại của nhân viên (thông qua retrieveCurrentTimecard()).
-  - Lưu phiếu chấm công khi nhân viên đã cập nhật (thông qua saveTimecard()).
-  
-- **TimecardController** tương tác với **Timecard** để:
-  - Thực hiện các thao tác cần thiết như thêm mã thanh toán, xác thực và gửi phiếu chấm công.
-  
-- **Employee** tham chiếu đến **Timecard** để cập nhật thông tin thời gian làm việc của mình. ## 5. Hợp nhất kết quả
+#### Lớp Timecard:
+
+- **Thuộc tính:**
+  - **startDate**: Ngày bắt đầu của thời gian chấm công.
+  - **endDate**: Ngày kết thúc của thời gian chấm công.
+  - **hoursWorked**: Bản đồ lưu trữ giờ làm việc theo từng ngày.
+  - **projectChargeNumbers**: Danh sách mã dự án liên quan đến thẻ chấm công.
+
+- **Phương thức:**
+  - **addHours(date: Date, hours: int)**: Thêm giờ làm việc cho một ngày cụ thể.
+  - **save()**: Lưu thẻ chấm công.
+  - **submit()**: Nộp thẻ chấm công.
+
+#### Lớp TimecardController:
+
+- **Phương thức:**
+  - **getCurrentTimecard(employee: Employee)**: Lấy thẻ chấm công hiện tại của nhân viên.
+  - **updateHours(timecard: Timecard, date: Date, hours: int)**: Cập nhật giờ làm việc cho thẻ chấm công.
+  - **validateAndSave(timecard: Timecard)**: Kiểm tra tính hợp lệ và lưu thẻ chấm công.
+  - **retrieveProjectCodes()**: Truy xuất mã dự án từ cơ sở dữ liệu.
+
+#### Lớp ProjectManagementDatabase:
+
+- **Phương thức:**
+  - **retrieveChargeNumbers()**: Truy xuất danh sách mã dự án từ cơ sở dữ liệu quản lý dự án.
+
+#### Mối Quan Hệ Giữa Các Lớp
+- **Employee → TimecardForm**: Nhân viên mở giao diện thẻ chấm công.
+- **TimecardForm → TimecardController**: Giao diện thẻ chấm công tương tác với điều khiển để quản lý thẻ chấm công.
+- **TimecardController → Timecard**: Điều khiển thẻ chấm công thực hiện các thao tác như cập nhật và lưu.
+- **TimecardController → ProjectManagementDatabase**: Điều khiển truy xuất mã dự án từ cơ sở dữ liệu quản lý dự án.
+
+## 5. Hợp nhất kết quả
+![Diagram](https://www.planttext.com/api/plantuml/png/l5NDRjim3BxdAOYS4Y1fiQjH11tI3IkmR0NIOMV5PXEjjgH9SefWs9Fji4VQAuoI9VadJh7J0iG7aXzDVln8__dr-zPOfcrTbHF5ycUsHvXk61UM_l38AyoPBgRmOmAGbymOU5UfKfuGlGbW2HWCztSP42vO1QimWwtLNEoz2K0g537ZUwchsJmuK5ZK7sIjpLUfdx583bFlAcuZnfj_Jb8btLoX6e226rMoKm_ZVboeslftpEOP72KluZlO4TledYkNuedhQkkgC8PBCOGUvCk3bjymjsjPe9dbxfd1HsxiJTFwgaMCL9uuz3EuOvOeSy_8h2ZER8UMfWmsJDquty8HlmAulYR6fKRJXC6BZmE56Wfs2XbKgFZ0z1u_rTKEzQ3cq1uhYeQm8XMnQ1BxGP_JEAJ7Js_sAWDhAQoMPKaLnWdkqQvhhKaKQInHObbI7oMDtW2hbIkpATW6LnkqW7zfuiXAxkBUYcBh-ZdFG_4xAKja8a0q4cTun9uEvcTyTbeFaHicQDagQfDgOZjcC34GS_P6T2bfsiVbSjLVYSnldA6OdhaRrw7Vqu6QvPPqm-sX0-j4TS44gNmJvdBivMQprAQ9aWI_FnDgAvsY1tPogEu12gQnhG-kpyhIifgq-wIeuDbYIUy9czmxJc7NltWL3IzDG8-BDGxWNZp9sU0Opbl5zcGQ4cxG7kIOl1UWceZ7aqfdT51KZBqednZmVufAEfo-cJQZxynfH5nTzzNLQeJZ30nTG4FzVA_H4DBA5jU9S-WpCZ9WUOx6U3tTKXxtXViB003__mC0)
+
+### Tài liệu Mô tả Kết quả Hợp nhất Biểu đồ Lớp
+
+#### 1. Tóm tắt
+Kết quả hợp nhất của hai sơ đồ lớp cho hệ thống quản lý thời gian làm việc (*Maintain Timecard*) và phương thức thanh toán (*Payment*) cung cấp một cái nhìn tổng thể về các chức năng của hệ thống. Hệ thống cho phép nhân viên nhập, cập nhật và gửi thông tin thời gian làm việc cũng như phương thức thanh toán của họ. 
+
+#### 2. Luồng Sự kiện
+
+##### 2.1. Luồng cơ bản
+1. **Mở biểu mẫu**: Nhân viên mở biểu mẫu thời gian làm việc hoặc phương thức thanh toán.
+2. **Lấy thông tin**: Hệ thống lấy và hiển thị thông tin hiện tại cho nhân viên.
+   - Nếu không có thời gian làm việc hiện tại, hệ thống tạo một bản mới với ngày bắt đầu và kết thúc được xác định.
+   - Đối với phương thức thanh toán, hệ thống hiển thị các tùy chọn phương thức hiện có.
+3. **Nhập thông tin**: Nhân viên nhập thông tin giờ làm việc và chọn mã dự án (đối với thời gian làm việc) hoặc chọn phương thức thanh toán (đối với thanh toán).
+4. **Lưu thông tin**: Hệ thống lưu thông tin và cho phép nhân viên xác nhận việc cập nhật.
+5. **Gửi thông tin**: Nhân viên có thể yêu cầu hệ thống gửi thông tin thời gian làm việc hoặc xác nhận phương thức thanh toán.
+6. **Xác nhận và thông báo**: Hệ thống xác nhận và thông báo thành công việc lưu và gửi thông tin.
+
+##### 2.2. Luồng thay thế
+- **Thông tin không hợp lệ**: Nếu nhân viên nhập số giờ không hợp lệ (>24 giờ) hoặc vượt quá giới hạn cho phép, hệ thống sẽ hiển thị thông báo lỗi và yêu cầu nhập lại.
+- **Thông tin đã được gửi**: Nếu thời gian làm việc đã được gửi, hệ thống hiển thị bản sao chỉ đọc và thông báo rằng không thể thay đổi thông tin.
+- **Cơ sở dữ liệu không khả dụng**: Nếu cơ sở dữ liệu không khả dụng, hệ thống thông báo lỗi và cho phép nhân viên chọn tiếp tục (không có mã chi phí để chọn) hoặc hủy bỏ thao tác.
+
+##### 3. Các yêu cầu đặc biệt
+- Không có yêu cầu đặc biệt nào.
+
+##### 4. Điều kiện tiên quyết
+- Nhân viên phải đăng nhập vào hệ thống trước khi bắt đầu ca sử dụng này.
+
+##### 5. Hậu điều kiện
+- Nếu ca sử dụng thành công, thông tin thời gian làm việc và phương thức thanh toán của nhân viên sẽ được lưu vào hệ thống. Nếu không, trạng thái hệ thống không thay đổi.
+
+##### 6. Điểm mở rộng
+- Không có điểm mở rộng nào.
+
