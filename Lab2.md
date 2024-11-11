@@ -196,6 +196,22 @@
 - **Quan hệ**: Tương tác với `LoginController` để xác thực thông tin đăng nhập, sử dụng lớp `User` để kiểm tra thông tin mật khẩu.
 ---
 ### 4. Create Administrative Report
+#### 4.1. Xác định các lớp phân tích
+- **Boundary**:
+  - **ReportSelectionForm**: Lớp giao diện người dùng cho Payroll Administrator để nhập các tiêu chí báo cáo và yêu cầu hệ thống tạo báo cáo.
+- **Control**:
+  - **ReportController**: Lớp xử lý logic nghiệp vụ để tạo báo cáo, lưu báo cáo và kiểm tra tính hợp lệ của các tiêu chí báo cáo.
+- **Entity**:
+  - **Report**: Lớp thực thể đại diện cho báo cáo được tạo ra, chứa thông tin và dữ liệu của báo cáo.
+  - **Employee**: Lớp thực thể đại diện cho nhân viên trong hệ thống, có thể là đối tượng của báo cáo.
+  - **ReportDatabase**: Lớp quản lý và lưu trữ các báo cáo đã tạo.
+
+#### 4.2. Biểu đồ Sequence
+![Diagram](https://www.planttext.com/api/plantuml/png/d9DHQiCm38RVVGezBj1Se8nGQ3SOb3siku2QQC7Ws47s2c7iP7lOaNQ5EOdZr4qPs_8G54lwz4jMlZu-DzOXkzT62L4gj1QUg3Ni3gIeTDBeUyCDl0aO7jAEU0pOilIsn1iUFf-xbbPmf5hg7Jflagw2qRJAT4IFs93D0gYIjbNOZQY0oCHxgc5hj6EZ574KK39vQ9Bskyh5LDdYASrVmOjKGynexKs9VUDJmWcLh6BH_xPzqLfeA8SPiuQ3Owdhu8ZCDVJlS1hmwTbvfJNifNMt8we84Lu-9dY0cZJnFCeikgFGku2DKhNdBoYkhtejVGHxcNX4I_42_pn-NoA9VzWDmxosfNbUB3P7B5PfZlh9DmaFCODdceYuwEsCA3R-XlgVwHi00F__0m00)
+
+#### 4.3. Biểu đồ Lớp
+
+
 ---
 ### 5. Maintain Employee Info
 ---
