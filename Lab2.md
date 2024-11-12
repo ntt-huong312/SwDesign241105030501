@@ -207,14 +207,124 @@
   - **ReportDatabase**: Lớp quản lý và lưu trữ các báo cáo đã tạo.
 
 #### 4.2. Biểu đồ Sequence
-![Diagram](https://www.planttext.com/api/plantuml/png/d9DHQiCm38RVVGezBj1Se8nGQ3SOb3siku2QQC7Ws47s2c7iP7lOaNQ5EOdZr4qPs_8G54lwz4jMlZu-DzOXkzT62L4gj1QUg3Ni3gIeTDBeUyCDl0aO7jAEU0pOilIsn1iUFf-xbbPmf5hg7Jflagw2qRJAT4IFs93D0gYIjbNOZQY0oCHxgc5hj6EZ574KK39vQ9Bskyh5LDdYASrVmOjKGynexKs9VUDJmWcLh6BH_xPzqLfeA8SPiuQ3Owdhu8ZCDVJlS1hmwTbvfJNifNMt8we84Lu-9dY0cZJnFCeikgFGku2DKhNdBoYkhtejVGHxcNX4I_42_pn-NoA9VzWDmxosfNbUB3P7B5PfZlh9DmaFCODdceYuwEsCA3R-XlgVwHi00F__0m00)
+![Diagram](https://www.planttext.com/api/plantuml/png/d5HBRjim4Dtp5BEqWUG21Xoa-NHL14MS2uofYKsK8bL-0kW4NUS8HHS52XJjeYjxaOM3t4Cdw1KwegcgCTJMZXR432M-3sT6FzSFfpwW2x7K0cMm3jvYxQpMhufI6UM3GzuKSnjDWQw6Qwgi2pFI98EovhLrfP3M13wItvrlCqrEa0agT6UUPnSOS8wUkjtBijAs9X9YEeMpPlKjmEDzi_eS8JIhZnRc6rvakqodGWnfXEEJ8NKJO0PoMPjJ72iSkPJUr1KTmPmMoh0U3iaKESXohh0aFnO3k3rTRtW2Zjv7yg5Z8sm_FvHDe0vmrQmUsBpQV8aWbvkli6pMdohGpVg307vskNiz4v0jCMspGybxR3WUjBWWGtpXLEIo_blCJYqAvIkDTPQs0yNEMx3UVIupFAzp6PlrlG7zz3tsRP5EzbBsBzKCx-Y20YhjH-CTb3qCfURw4-DMwNILHz16RwnCBR0FSZSI4_2CDtn5MzJ_utTOVxEUd31BSRZZNC9PqkYZ3YCVfIIVUuSqivxzdjPtoyqFiqZ5UX6LH9Ujv-fmtmgHI6xwsSWiUu_8iALBvwmRyHHuND1O9APJNjj_uoy0003__mC0)
 
 #### 4.3. Biểu đồ Lớp
+![Diagram](https://www.planttext.com/api/plantuml/png/d9DHQiCm38RVVGezBj1Se8nGQ3SOb3siku2QQC7Ws47s2c7iP7lOaNQ5EOdZr4qPs_8G54lwz4jMlZu-DzOXkzT62L4gj1QUg3Ni3gIeTDBeUyCDl0aO7jAEU0pOilIsn1iUFf-xbbPmf5hg7Jflagw2qRJAT4IFs93D0gYIjbNOZQY0oCHxgc5hj6EZ574KK39vQ9Bskyh5LDdYASrVmOjKGynexKs9VUDJmWcLh6BH_xPzqLfeA8SPiuQ3Owdhu8ZCDVJlS1hmwTbvfJNifNMt8we84Lu-9dY0cZJnFCeikgFGku2DKhNdBoYkhtejVGHxcNX4I_42_pn-NoA9VzWDmxosfNbUB3P7B5PfZlh9DmaFCODdceYuwEsCA3R-XlgVwHi00F__0m00)
+
+#### Lớp *ReportSelectionForm*
+- **Mô tả**: Giao diện người dùng cho Payroll Administrator để nhập thông tin cần thiết cho báo cáo hành chính.
+- **Phương thức**:
+  - `enterReportCriteria(reportType: String, beginDate: Date, endDate: Date, employeeNames: List<String>)`: Nhận các thông tin từ Payroll Administrator để tạo báo cáo.
+  - `displayReport(report: Report)`: Hiển thị báo cáo sau khi được tạo ra.
+  - `enterSaveDetails(fileName: String, fileLocation: String)`: Nhận thông tin về tên và vị trí lưu báo cáo nếu Payroll Administrator quyết định lưu báo cáo.
+  - `confirmSave(save: Boolean)`: Xác nhận việc lưu báo cáo.
+- **Quan hệ**: Tương tác với Payroll Administrator để nhận thông tin và gửi yêu cầu tạo báo cáo đến `ReportController`. Cũng nhận yêu cầu lưu báo cáo nếu cần.
+
+#### Lớp *ReportController*
+- **Mô tả**: Lớp xử lý logic nghiệp vụ để tạo và lưu báo cáo, đồng thời kiểm tra tính hợp lệ của các tiêu chí báo cáo.
+- **Phương thức**:
+  - `createReport(reportType: String, beginDate: Date, endDate: Date, employeeNames: List<String>)`: Tạo báo cáo dựa trên các tiêu chí đã nhập.
+  - `saveReport(report: Report, fileName: String, fileLocation: String)`: Lưu báo cáo vào hệ thống.
+  - `validateReportCriteria(reportType: String, beginDate: Date, endDate: Date, employeeNames: List<String>)`: Kiểm tra tính hợp lệ của các tiêu chí báo cáo.
+
+#### Lớp *Report*
+- **Mô tả**: Đại diện cho báo cáo được tạo ra với các thông tin liên quan đến báo cáo.
+- **Thuộc tính**:
+  - `reportType: String`: Loại báo cáo (Total Hours Worked hoặc Pay Year-to-Date).
+  - `beginDate: Date`: Ngày bắt đầu của báo cáo.
+  - `endDate: Date`: Ngày kết thúc của báo cáo.
+  - `employeeNames: List<String>`: Danh sách nhân viên có trong báo cáo.
+  - `data: String`: Dữ liệu báo cáo.
+- **Phương thức**:
+  - `generateReport()`: Tạo ra nội dung báo cáo dựa trên tiêu chí đã nhập.
+
+#### Lớp *Employee*
+- **Mô tả**: Lớp đại diện cho thông tin của nhân viên.
+- **Thuộc tính**:
+  - `name: String`: Tên nhân viên.
+- **Phương thức**:
+  - `getName()`: Trả về tên nhân viên.
+
+#### Lớp *ReportDatabase*
+- **Mô tả**: Lớp quản lý các báo cáo đã tạo và lưu trữ chúng.
+- **Phương thức**:
+  - `saveReport(report: Report, fileName: String, fileLocation: String)`: Lưu báo cáo vào hệ thống.
+  - `getReport(reportID: String)`: Truy xuất báo cáo đã lưu.
 
 
 ---
 ### 5. Maintain Employee Info
+#### 5.1. Xác định các lớp phân tích
+- **Boundary Class**:
+  - **EmployeeMaintenanceForm**: Là lớp boundary duy nhất để giao tiếp với Payroll Administrator. Lớp này cung cấp giao diện để Payroll Administrator chọn hành động (Add, Update, Delete), nhập thông tin nhân viên mới, cập nhật thông tin, hoặc xác nhận khi muốn xóa nhân viên.
+
+- **Control Class**:
+  - **EmployeeController**: Chịu trách nhiệm  tra dữ liệu đầu vào từ Payroll Administrator.
+
+- **Entity Classes**:
+  - **Employee**: Thực thể chứa thông tin của nhân viên, với các thuộc tính như employeeId, name, employeeType, address, SSN, deductions, phoneNumber, rate (bao gồm hourlyRate, salary, commissionRate, hourLimit, v.v.).
+  - **EmployeeDatabase**: Đại diện cho cơ sở dữ liệu nhân viên, trong đó lưu trữ thông tin tất cả các nhân viên.
+#### 5.2. Biểu đồ Sequence
+![Diagram](https://www.planttext.com/api/plantuml/png/t5P1Qjj05DtFAJxPT9KB55nYdBPPjCKGjsGx7WtLW3JZIYCJBKiNfPH2IvVTn0qbO0WKcfMqo692xZ4dw1Nw9P5uP4ksbPGkkh6OaV_xRzv_pvxV-ULUh6caap0Wb6aLmP2caGg2lXSAAM8TqMAJnZ3iax5Af4UZ51w7aq2bd3-dGcekgMJyYOf2mfJKM7pxVb2j0nuHBhNGYyhbzJxLT4nZJiW3w7lUxJuSyZS9HtmoxCFkexREy106liq_ITWP-MOUmWlVV9VmIfYvt25jHGxUWYb2FRNvkO3Kp1DWDZjBre8wbGuUeeniDbCGsloRS2jXMkvetrp8rw251ERZKjZiKcy0lH49mPzT_qngg6KVilBDtROp7faP0-dRx5n2K80XeHFf0ojeDV9Og_w1iFaxYI0s_mYXEKNeWjkqWTlA510OXxiL1kdruEN4evglEWHwFRArImPuy0aAY0zTcojCpKcbosIPmr_mqPgsfIlQEcxsWyr-fAwfNEsqprK1tS4UeyXcfmMfjosWzxI80-hZ_dlSnxW8r2a_exK-sqpq0netHh7f9hBT9jSYvzKNd19pssu_fye0iZ80Gdo5-7hMIBLRX9cBMujo4Pbz7l1xH-R8_AB_C2eDxVxxYBWJFIxEtoK8oyLtdC5n6yn6WQy-cndQpaETaqPlOtBm9w2EsitcPVJmOz6dbU9QhKRLmCO6_w5BeTt8OBRLpJK8QlSWGlQuz8gxqXy0003__mC0)
+
+#### 5.3. Biểu đồ Lớp
+![Diagram](https://www.planttext.com/api/plantuml/png/Z5HBJiCm4Dtx55csYrwW2zIMW8G45Q9SO1fFMmj_WZskP25Ene8ZSGMIjCw_XMmilNdpPiRpd9-lxuKZiEILP8m4IKpkL4uXIGNiBIZ65gXv4MrecGJdacS8raYvv4feuSW26PjyiAJyBBvxTBJCI1WzWUgO9nkoGk-dx9ET9Of2qWJ49n2QK8FEyDvO5LMuSBc445aFUcScgFBoRCGgPcRqJbYLeiIgOidYFSuUgL7AFKscyxg1OKktHbCv7jOp0USnMEetoMTzdtCWl4hXPNyTIh_BsH6aQEiyy1vjdgoCaGXws7Fi5ElSc7N2DIZi8f7v6l9Uf9ZMedDTSBDPTm6Et5VBxH7pWz6uzcgBjXieND8hT33Uol1IuQdnMuadt8446xfOPfGIpXNrXlnIvr4eGRqKY-sjZ9Wl1O8jkFhs71olRx5bf5KOsKzjgl_QGe5zYr3X_qikBZeVVNEpsSsbbyGklR1sJcDrDkB-DlElUBnADhZRZihvXy9-0G00__y30000)
+
+#### Lớp *PayrollAdministrator*
+- **Mô tả**: Payroll Administrator thực hiện các hành động như thêm, cập nhật, hoặc xóa thông tin nhân viên.
+- **Phương thức**:
+  - `requestAction(action: String)`: Xác định hành động cần thực hiện. Nhận đầu vào là một chuỗi hành động ("Thêm", "Cập nhật", hoặc "Xóa") và chuyển yêu cầu đó đến hệ thống để xử lý.
+
+#### Lớp *EmployeeMaintenanceForm*
+- **Mô tả**: Lớp giao tiếp với Payroll Administrator, cung cấp giao diện hiển thị thông tin nhân viên và xác nhận xóa nhân viên.
+- **Phương thức**:
+  - `displayEmployeeInfo(empInfo: String)`: Hiển thị thông tin chi tiết của nhân viên để Payroll Administrator có thể xem hoặc cập nhật.
+  - `confirmDeletion(empId: String)`: Xác nhận yêu cầu xóa nhân viên dựa trên mã nhân viên.
+  - `getEmployeeInput()`: Thu thập thông tin của nhân viên mới từ Payroll Administrator khi thêm nhân viên.
+
+#### Lớp *EmployeeController*
+- **Mô tả**: Nhận các yêu cầu từ `EmployeeMaintenanceForm`, xử lý logic nghiệp vụ và chuyển tiếp yêu cầu tới cơ sở dữ liệu để cập nhật thông tin nhân viên.
+
+- **Phương thức**:
+  - `addEmployee(emp: Employee)`: Thêm một nhân viên mới vào hệ thống.
+  - `updateEmployee(emp: Employee)`: Cập nhật thông tin của nhân viên đã có trong hệ thống.
+  - `deleteEmployee(empId: String)`: Xóa một nhân viên khỏi hệ thống dựa trên mã nhân viên.
+  - `validateEmployeeId(empId: String): Boolean`: Kiểm tra mã nhân viên có tồn tại và hợp lệ hay không.
+
+#### Lớp *Employee*
+- **Mô tả**: Chứa thông tin chi tiết của một nhân viên, bao gồm các thông tin cơ bản và thông tin về lương.
+- **Thuộc tính**:
+  - `employeeId`: Mã định danh duy nhất của nhân viên.
+  - `name`: Tên của nhân viên.
+  - `employeeType`: Loại nhân viên (theo giờ, hưởng lương cố định, hưởng hoa hồng).
+  - `address`: Địa chỉ nhân viên.
+  - `SSN`: Số an sinh xã hội của nhân viên.
+  - `deductions`: Các khoản khấu trừ thuế và phí.
+  - `phoneNumber`: Số điện thoại của nhân viên.
+  - `rate`: Mức lương chung (dùng cho loại nhân viên chung).
+  - `hourlyRate`: Mức lương theo giờ (dùng cho nhân viên theo giờ).
+  - `salary`: Mức lương cố định (dùng cho nhân viên hưởng lương cố định hoặc hoa hồng).
+  - `commissionRate`: Tỉ lệ hoa hồng (dùng cho nhân viên hưởng hoa hồng).
+  - `hourLimit`: Giới hạn giờ làm (đối với nhân viên có giới hạn giờ làm việc).
+
+ - **Phương thức**:
+  - `createEmployee()`: Tạo một đối tượng nhân viên mới và khởi tạo các thuộc tính của nó.
+
+
+#### Lớp *EmployeeDatabase*
+- **Vai trò**: Là lớp entity quản lý cơ sở dữ liệu nhân viên, bao gồm các thao tác như lưu, truy xuất, cập nhật và đánh dấu xóa nhân viên.
+
+- **Phương thức**:
+  - `saveEmployee(emp: Employee)`: Lưu một nhân viên mới vào cơ sở dữ liệu.
+  - `getEmployeeById(empId: String): Employee`: Truy xuất thông tin nhân viên dựa trên mã nhân viên.
+  - `updateEmployee(emp: Employee)`: Cập nhật thông tin của nhân viên trong cơ sở dữ liệu.
+  - `markEmployeeForDeletion(empId: String)`: Đánh dấu nhân viên cần xóa để hệ thống xóa sau khi tính bảng lương cuối cùng.
+
 ---
 ### 6. Run Payroll
+#### 6.1. Xác định các lớp phân tích
+#### 6.2. Biểu đồ Sequence
+#### 6.3. Biểu đồ Lớp
 ---
 ## II. Viết code Java mô phỏng ca sử dụng Maintain Timecard
