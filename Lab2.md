@@ -324,6 +324,16 @@
 ---
 ### 6. Run Payroll
 #### 6.1. Xác định các lớp phân tích
+- **Boundary Classes**:
+  - **PayrollScheduler (System Clock)**: Kích hoạt quy trình tính lương theo lịch định kỳ.
+  - **PayrollPrinter (Printer)**: Xử lý việc in phiếu lương cho các nhân viên nhận lương qua "mail" hoặc "pick-up".
+  - **BankGateway (Bank System)**: Xử lý các giao dịch chuyển khoản cho các nhân viên nhận lương qua "direct deposit".
+- **Control Class**:
+  - **PayrollController**: Điều khiển quy trình tính lương, từ việc lấy dữ liệu nhân viên, tính toán lương đến việc quyết định phương thức thanh toán.
+- **Entity Classes**:
+  - **Employee**: Lưu trữ thông tin của nhân viên, bao gồm các thông tin về lương và phương thức nhận lương.
+  - **PayrollDatabase**: Lưu trữ thông tin về nhân viên, giờ làm, và các purchase orders cần thiết cho việc tính lương.
+    
 #### 6.2. Biểu đồ Sequence
 #### 6.3. Biểu đồ Lớp
 ---
