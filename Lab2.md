@@ -335,6 +335,60 @@
   - **PayrollDatabase**: Lưu trữ thông tin về nhân viên, giờ làm, và các purchase orders cần thiết cho việc tính lương.
     
 #### 6.2. Biểu đồ Sequence
+![Diagram](https://www.planttext.com/api/plantuml/png/Z5I_RjGm6D_p59zkWk5Uu0PKjKKjAa8djKAi9h7ELXmx90wG4Tt0m5GnCB1Sg4uLY1ELG4AAXmv6znv-0bw1pscuIzhI4CbsOldtv_iJ_pQNExaccIuI4P1GgmoEorpJP4-eC6vtfXcNccRjrowHyTMP8EYSXV43c98oKq8SXun6XQ3P18xiAcJ0bAih3I-A4dHclqe6sgvm5kkBTILdmNLSXsjFIUrNJxRhwcyQVfsw-hmO9Di2EspxH9Fd9ASJUEpgPGaHGM1kA_GecVqauIMtNwINCESuSsVU513ZybQ2PlwmLhQIS4_ExABi2zyFhed0-FOmzlzVD0Y4KYayTUOZXyIP3xmB2G2VMyDzcAH2bHJZFEdbnWE8q31bLniOb3EVmrvimYvWb10kHatTVeOmIdaOZujqrE3_ATfkjjqoWKSIKiPTVLdqzAd0r0mQY7X6GmqHJLNEzO2oRya3ekahKaxWm9aLXnad2Y9dtc6MGrQKpimbn3wWCxaXywaun3mtBaxH3POLayli0jzZPdyq2q8yqxBr__VfYDxmS89yAvWrJWJsVi_FXeNAAEYk0wKymfQO9zZq10UIDjcpoFtQVYURqZxfjTJwmfcp45ymiGprwsNHDDfy2nggv_QVUOOGmCZUGxwkRZIYZyAFEt_0pjLmg33DeD7I7JV33ZBwg-aF0000__y30000)
+
 #### 6.3. Biểu đồ Lớp
+![Diagram](https://www.planttext.com/api/plantuml/png/b5HBJiCm4Dtd55wcYruWGbKfBGY9GgNs0bDdIAqwTZHsG17YP2mu4bV0BdQQ9hI2B19xvisRVxu-FgV60jcwb4d29HZ3Lj2GbdBDTvZN4ecz9SmzOyPh8bHs3XOpvjy7EMEMH54W1RjqbBptg5OabEqGLT0uShxFFE1m2aoL1qPPEeHrg6UWzdSkXbTeMbvBe0nmAxJAsEPu2MfXhbz0IDXA5_zCQucWWcE3AkyOfEUOHW5FQAdvcq6_63TQMVyzhOUNz0exPYX58LoqYxAIka4q6NiGnbx5-wGjc-PepB41Fs8EajVIqJb5Yi4cOz4wmdAKQ5iVlmBxERWOOGi6smpmOeIkCw943fH7_IRSexwgYUySuHFbI16qwWfZhWNQHRyiQTvMRdIcHFz9Cee6sTtd6LkxQLT5K1YGG4t6bbfX4sHRLFWih4jY5av1aRjrEio4KytRyt44IhTRIxGxVUgbqyT7zClHzhS4sjzgcllK_0mUKXXixtWy6OvUCXp63YwszmmgrkSoILZwCw3E-YRzeJhnaIHJjvl-z_GD003__mC0)
+
+#### Lớp *PayrollScheduler*
+- **Mô tả**: Lớp này đại diện cho hệ thống định kỳ (lịch trình) để kích hoạt quy trình tính lương vào thời điểm cụ thể (mỗi thứ Sáu hoặc ngày làm việc cuối tháng).
+- **Thuộc tính**:
+  -`currentDate`: Date: Ngày hiện tại, được sử dụng để xác định thời điểm kích hoạt quy trình.
+- **Phương thức**:
+  - `triggerPayroll()`: Phương thức để kích hoạt quy trình tính lương.
+#### Lớp *PayrollController*
+- **Mô tả**: Lớp trung tâm điều khiển toàn bộ quy trình tính lương. Nó xử lý việc lấy dữ liệu nhân viên, tính toán lương, và thực hiện thanh toán cho từng nhân viên.
+- **Thuộc tính**:
+  - `payrollDate`: Date: Ngày tính lương hiện tại.
+  - `eligibleEmployees`: List<Employee>: Danh sách nhân viên đủ điều kiện để nhận lương trong ngày.
+- **Phương thức**:
+  - `processPayroll()`: Xử lý toàn bộ quy trình tính lương từ bắt đầu đến kết thúc.
+  - `calculatePay(employee: Employee)`: Tính toán lương (lương thực nhận) cho một nhân viên.
+  - `deleteEmployee(employee: Employee)`: Xóa thông tin nhân viên sau khi đã xử lý (nếu nhân viên được đánh dấu để xóa).
+#### Lớp *PayrollDatabase*
+- **Mô tả**: Cơ sở dữ liệu lưu trữ thông tin liên quan đến quy trình tính lương, bao gồm danh sách nhân viên, thời gian làm việc (timecards), và các đơn mua hàng (purchase orders).
+- **Thuộc tính**:
+  - `employees: List<Employee>`: Danh sách các nhân viên trong cơ sở dữ liệu.
+  - `timecards: List<Timecard>`: Danh sách các phiếu thời gian làm việc.
+  - `purchaseOrders`: List<PurchaseOrder>: Danh sách các đơn mua hàng liên quan đến hoa hồng.
+- **Phương thức**:
+  **getEligibleEmployees(date: Date)**: List<Employee>: Lấy danh sách nhân viên đủ điều kiện để tính lương tại một ngày cụ thể.
+  - `deleteEmployee(employee: Employee)`: Xóa thông tin nhân viên đã được xử lý.
+#### Lớp *Employee*
+- **Mô tả**: Lớp đại diện cho một nhân viên. Nó chứa các thông tin cần thiết để tính lương, như lương cơ bản, phúc lợi, các khoản khấu trừ, và phương thức thanh toán.
+- **Thuộc tính**:
+  - `employeeId`: String: Mã định danh duy nhất của nhân viên.
+  - `salary`: Money: Lương cơ bản của nhân viên.
+  - `benefits`: Benefits: Các khoản phúc lợi của nhân viên.
+  - `deductions`: Deductions: Các khoản khấu trừ của nhân viên.
+  - `paymentMethod`: String: Phương thức nhận lương của nhân viên (ví dụ: chuyển khoản, thư, hoặc nhận trực tiếp).
+- **Phương thức**:
+  - `calculateNetPay()`: Tính toán lương thực nhận của nhân viên sau khi áp dụng phúc lợi và khấu trừ.
+  - `markForDeletion()`: Đánh dấu nhân viên để xóa sau khi đã xử lý.
+#### Lớp *PayrollPrinter*
+- **Mô tả**: Lớp này chịu trách nhiệm in phiếu lương cho nhân viên nếu phương thức thanh toán là gửi thư hoặc nhận trực tiếp.
+- **Thuộc tính**:
+  - `paycheck`: Paycheck: Thông tin phiếu lương cần in.
+- **Phương thức**:
+  - `printPaycheck(paycheck: Paycheck)`: In phiếu lương cho nhân viên.
+#### Lớp *BankGateway*
+- **Mô tả**: Lớp này giao tiếp với hệ thống ngân hàng để thực hiện các giao dịch chuyển khoản lương cho nhân viên.
+- **Thuộc tính**:
+  - `transaction`: Transaction: Giao dịch ngân hàng cần xử lý.
+  - `isAvailable`: Boolean: Trạng thái khả dụng của hệ thống ngân hàng.
+- **Phương thức**:
+  - `sendTransaction(transaction: Transaction)`: Gửi giao dịch chuyển khoản tới hệ thống ngân hàng.
+  - `retryTransaction(transaction: Transaction)`: Thử lại giao dịch nếu hệ thống ngân hàng không khả dụng.
+
 ---
 ## II. Viết code Java mô phỏng ca sử dụng Maintain Timecard
