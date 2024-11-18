@@ -392,3 +392,75 @@
 
 ---
 ## II. Viết code Java mô phỏng ca sử dụng Maintain Timecard
+### 1. Lớp `EmployeeLoginForm` và `PayrollAdminLoginForm`
+
+
+    public void displayForm() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter admin username: ");
+        String username = scanner.nextLine();
+        System.out.print("Enter admin password: ");
+        String password = scanner.nextLine();
+
+        boolean success = loginController.requestLogin(username, password);
+        if (success) {
+            System.out.println("Admin login successful!");
+        } else {
+            System.out.println("Invalid credentials. Please try again.");
+        }
+    }
+    public void displayForm() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter username: ");
+        String username = scanner.nextLine();
+        System.out.print("Enter password: ");
+        String password = scanner.nextLine();
+
+        boolean success = loginController.requestLogin(username, password);
+        if (success) {
+            System.out.println("Employee login successful!");
+        } else {
+            System.out.println("Invalid credentials. Please try again.");
+        }
+    }
+
+### 2. Lớp `LoginController`
+
+    public boolean requestLogin(String username, String password) {
+        return userDatabase.validateUser(username, password);
+    }
+
+
+### 3. Lớp `User`
+
+    public User(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public boolean checkPassword(String inputPassword) {
+        return this.password.equals(inputPassword);
+    }
+
+### 4. Lớp `UserDatabase`
+
+    public UserDatabase() {
+        // Sample data
+        users.add(new User("employee1", "password123"));
+        users.add(new User("admin1", "adminPass"));
+    }
+
+    public boolean validateUser(String username, String password) {
+        for (User user : users) {
+            if (user.getUsername().equals(username) && user.checkPassword(password)) {
+                return true;
+            }
+        }
+        return false;
+    }
+}
+
