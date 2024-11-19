@@ -392,75 +392,126 @@
 
 ---
 ## II. Viết code Java mô phỏng ca sử dụng Maintain Timecard
-### 1. Lớp `EmployeeLoginForm` và `PayrollAdminLoginForm`
+### 1. Lớp `Employee`
+public class Employee {
+    private int employeeID;
+    private String name;
 
-
-    public void displayForm() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("Enter admin username: ");
-        String username = scanner.nextLine();
-        System.out.print("Enter admin password: ");
-        String password = scanner.nextLine();
-
-        boolean success = loginController.requestLogin(username, password);
-        if (success) {
-            System.out.println("Admin login successful!");
-        } else {
-            System.out.println("Invalid credentials. Please try again.");
-        }
-    }
-    public void displayForm() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("Enter username: ");
-        String username = scanner.nextLine();
-        System.out.print("Enter password: ");
-        String password = scanner.nextLine();
-
-        boolean success = loginController.requestLogin(username, password);
-        if (success) {
-            System.out.println("Employee login successful!");
-        } else {
-            System.out.println("Invalid credentials. Please try again.");
-        }
+    public Employee(int employeeID, String name) {
+        this.employeeID = employeeID;
+        this.name = name;
     }
 
-### 2. Lớp `LoginController`
-
-    public boolean requestLogin(String username, String password) {
-        return userDatabase.validateUser(username, password);
+    public void openTimecardForm() {
+        System.out.println("Opening Timecard Form...");
     }
 
-
-### 3. Lớp `User`
-
-    public User(String username, String password) {
-        this.username = username;
-        this.password = password;
+    public void enterHoursWorked() {
+        System.out.println("Entering hours worked...");
     }
 
-    public String getUsername() {
-        return username;
+    public void submitTimecard() {
+        System.out.println("Submitting timecard...");
     }
 
-    public boolean checkPassword(String inputPassword) {
-        return this.password.equals(inputPassword);
+    public int getEmployeeID() {
+        return employeeID;
     }
 
-### 4. Lớp `UserDatabase`
-
-    public UserDatabase() {
-        // Sample data
-        users.add(new User("employee1", "password123"));
-        users.add(new User("admin1", "adminPass"));
-    }
-
-    public boolean validateUser(String username, String password) {
-        for (User user : users) {
-            if (user.getUsername().equals(username) && user.checkPassword(password)) {
-                return true;
-            }
-        }
-        return false;
+    public String getName() {
+        return name;
     }
 }
 
+
+### 2. Lớp `TimecardForm`
+
+public class TimecardForm {
+    public void displayTimecard(Timecard timecard) {
+        System.out.println("Displaying Timecard: " + timecard);
+    }
+
+    public void inputHours() {
+        System.out.println("Inputting hours worked...");
+    }
+
+    public void saveTimecard() {
+        System.out.println("Saving timecard...");
+    }
+
+    public void confirmSubmission() {
+        System.out.println("Confirming timecard submission...");
+    }
+
+    public void showProjectCodes(List<String> codes) {
+        System.out.println("Project Codes: " + codes);
+    }
+}
+
+
+
+### 3. Lớp `Timecard`
+
+public class Timecard {
+    private Date startDate;
+    private Date endDate;
+    private Map<Date, Integer> hoursWorked = new HashMap<>();
+    private List<String> projectChargeNumbers;
+
+    public Timecard(Date startDate, Date endDate, List<String> projectChargeNumbers) {
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.projectChargeNumbers = projectChargeNumbers;
+    }
+
+    public void addHours(Date date, int hours) {
+        hoursWorked.put(date, hours);
+        System.out.println("Added " + hours + " hours on " + date);
+    }
+
+    public void save() {
+        System.out.println("Timecard saved.");
+    }
+
+    public void submit() {
+        System.out.println("Timecard submitted.");
+    }
+    @Override
+    public String toString() {
+        return "Timecard [startDate=" + startDate + ", endDate=" + endDate + ", hoursWorked=" + hoursWorked + "]";
+    }
+}
+
+
+### 4. Lớp `Timecard Controller`
+
+public class TimecardController {
+    public Timecard getCurrentTimecard(Employee employee) {
+        System.out.println("Retrieving current timecard for employee: " + employee.getName());
+        return new Timecard(new Date(), new Date(), new ArrayList<>());
+    }
+    
+    public void updateHours(Timecard timecard, Date date, int hours) {
+        timecard.addHours(date, hours);
+    }
+    
+    public boolean validateAndSave(Timecard timecard) {
+        if (timecard != null) {
+            timecard.save();
+            return true;
+        }
+        System.out.println("Timecard is invalid.");
+        return false;
+    }
+    
+    public List<String> retrieveProjectCodes() {
+        return ProjectManagementDatabase.retrieveChargeNumbers();
+    }
+}
+
+### 5. Lớp `ProjectManagementDatabase`
+public class ProjectManagementDatabase {
+    public static List<String> retrieveChargeNumbers() {
+        return Arrays.asList("P001", "P002", "P003");
+    }
+}
