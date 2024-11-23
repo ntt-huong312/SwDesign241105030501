@@ -48,6 +48,7 @@ Hệ thống thẻ chấm công sẽ lưu trữ những thông tin sau cho mỗi
 - name: Tên nhân viên.
 - paymentMethod: Phương thức thanh toán (chuyển khoản/in phiếu).
 - status: Trạng thái nhân viên (đang làm việc, bị xóa, nghỉ việc).
+  
 `Paycheck Table`:
 - paycheckId: Mã phiếu lương.
 - employeeId: Liên kết với nhân viên.
