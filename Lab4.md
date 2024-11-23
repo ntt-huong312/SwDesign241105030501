@@ -39,6 +39,7 @@ Hệ thống thẻ chấm công sẽ lưu trữ những thông tin sau cho mỗi
 ---
 ## 2. Ca sử dụng: RunPayroll
 ### 2.1 Mô tả sự tương tác giữa các đối tượng thiết kế
+- SystemClock: Kích hoạt quy trình tính lương.
 ### 2.2 Đơn giản hóa sơ đồ sequence bằng Subsystem
 ![Diagram](https://www.planttext.com/api/plantuml/png/Z5EzJiCm4Dxz53V2q1V8WAgs0wWCbOfG9SHWagYswfv3uY3b6PYO65W8224X8fWJeGv6VGy_0Q-0qmObb1Jm42jtzzrtFvy_YaKtKZHKyLmGwYePmZY9b3_l2-dEAakFucnjhGoZaAFoGq82Y-Gk3oWg6D4ab4ACNUPxiR3U5cTVeYhl4jlWWSxU3xW3Gvsv39WqUQhWF4v0XVeP6IYTsQzOlYvJd99DN2DNpUP0p-Gl2jwlJFuOjsUeenif1bJHCnhv3XoQ_241ZrfWf5DR639zXt31zHEIZMZej1SnQ4SJ8MK09yUckE4mDyKrRxfF2TZploAFlZNMmFrLcJNP0TgDRoUhLU30n1GP2Fq6YfKjAQbJN27he6rCGvClodMQ_1wcd4hmJ77fib-8AxKvS80GC6xnyLUBi8EhNzUk5NVNATRHs-WdTlfskYRF43WI7ptI9e1MGUvBVOkWh12QUYHTcwHyFfy0003__mC0)
 
