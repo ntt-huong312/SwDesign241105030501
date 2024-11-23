@@ -427,6 +427,7 @@ public class Employee {
 ### 2. Lớp `TimecardForm`
 
 public class TimecardForm {
+
     public void displayTimecard(Timecard timecard) {
         System.out.println("Displaying Timecard: " + timecard);
     }
@@ -453,6 +454,7 @@ public class TimecardForm {
 ### 3. Lớp `Timecard`
 
 public class Timecard {
+
     private Date startDate;
     private Date endDate;
     private Map<Date, Integer> hoursWorked = new HashMap<>();
@@ -486,6 +488,7 @@ public class Timecard {
 ### 4. Lớp `Timecard Controller`
 
 public class TimecardController {
+
     public Timecard getCurrentTimecard(Employee employee) {
         System.out.println("Retrieving current timecard for employee: " + employee.getName());
         return new Timecard(new Date(), new Date(), new ArrayList<>());
@@ -511,6 +514,7 @@ public class TimecardController {
 
 ### 5. Lớp `ProjectManagementDatabase`
 public class ProjectManagementDatabase {
+
     public static List<String> retrieveChargeNumbers() {
         return Arrays.asList("P001", "P002", "P003");
     }
