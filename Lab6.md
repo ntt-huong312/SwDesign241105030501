@@ -1,1 +1,29 @@
+# THIẾT KẾ LỚP
+## HỆ THỐNG PAYROLL SYSTEM
+
+### I.  Ca sử dụng Maintain Timecard
+### 1. Xác định các operations
+![Diagram](https://www.planttext.com/api/plantuml/png/Z591JiCm4Bpx5NjC9Vg17505277WK85umDPU9HQE7RpheWhnCWuyYIzWHsdQfaZ5nvdnpipQFr_VAnQCaZgdj4DcU0oDzVSXTl2XO3Y9ANhig8PdYTOt8zndzNk8PWPpsdHMXYdLeePji6PaZENUuUw9E3cfE6bDp3NSXE08_LxxgOw3t0OlCJX7SOg3ILhoOZKALVDiLsUn5fF3OVGB7ysxKEy1kPrHkYNzkXxvole-oVgVhdSek46coRqXAVXPaJoWuADgYywQtFTFwQNEXnTTBg_Frbe3apVW2WoHtXAngBceN3o9NqCMnjsmFCZ9K9tGUttM3Si27ScKHqF7QfNzod_x1G00__y30000)
+
+### 2. Xác định các trạng thái
+![Diagram](https://www.planttext.com/api/plantuml/png/RD312i8m303GUx-YnqtO3mYJUN0my2Pw4GzbYxFGjPgcNiGly-0d-Gkk7HjZz5AQa9U4_3xVmf90SfrY_OU0xqqhTMcmUx7pwiApRCEhHW7pJuXEGib6aDHjfU-E-9eZF1nO2Z99sRB0ewsZ6sYITSZtvZaKGIX9KfxddD115EyG3SRDLIWBRD7TcuEhQx1sfeuMS3OeOaeXbKE8cc7Gs7MwoaYcnB3h5BvP0Rhnr_q3003__mC0)
+
+### 3. Xác định các thuộc tính
+![Diagram](https://www.planttext.com/api/plantuml/png/P90n3i8m34Ntd28ZIFG27L05Y8a58GxWjbQ9b2PWEp0WJiR0aRW2IOLQQ3r--xzl-_ry5In04bghAWlCUkSRuxQUMdrNkgl0I0vQpFL1oBZcAv_ZzCrJFP8vbAsHZZARv_hgJQqUwXU-zax8MulKHq2G4pen5GZEndcBILJahhot26v07wDh0m8bCFRS1YNf4sG493svXtkpR3bPC1hGrQm9Bm5PrBYVF7_9kTu798FSlKrNX7Kw32oh8fBIdpy0003__mC0)
+
+### 4. Xác định các phụ thuộc, quan hệ kết hợp
+![Diagram](https://www.planttext.com/api/plantuml/png/n94n3i8m34NtdY8ZIFG27L2XWea1mGcYngeYEN6n4r25E1a3H-8Aj5NBKePkU8g-u_-VxFVpbKlG7AB3f4GjedQkHce03bHPloTswfweli07u8B1j0-hKHPHWBrsaAbpOEkhbQfRXnkn6PLbfgvapM1WhDIecnD8nB2GM9OWagaj4OBsuzz7Cf0STSE4k37E-l_Jz0G5-T0n0Nyv62uH9FJjUGn3GcSzNNQQhYTHxInuex2JnxpaztPcZ-Ujr1tz0m00__y30000)
+
+---
+### I.  Ca sử dụng Run Payroll
+### 1. Xác định các operations
+![Diagram](https://www.planttext.com/api/plantuml/png/Z5HBZjim3Dtx5DoDiyW5X2AOvjEYGASDchc08dCI8R9aIF8CZA8dww97wXLAoP9ZvpFe9h4eYkHxVEJVttyUdUVMjxKg7c1fMbrnsy5ASUVG5IBymvPtrYYr4qUiMeKMVXO0Sn2jjQZzcdja47x92k2jF1pGfZVbZC6haLNngvW6srgf_H2guHq55oSMhkDNZDK4fsmfhvskWY-vFdscIjvubo9xoxNZmakZ6JoV3_5Ike-lN2g-LuHWQOn2hcDYXxeQEPVteiocponws_tdkrpu0soqb_wIyqtTADCX9XYOZbyg1ZkYM1-YsN55xMBmP3HsqR97ZI_IEoeiVKLpHPsBcUbYFNndxcjgunFwenb71n1SYLOHdTymT27qCYS2gBazVJ9sZGeZr7kD9c7mFNUNGAYEhzBv3nddek-Mh55mM-NRvtJkRvlMYYE5-cuhjDbbEpOkOca7z1ib3vBQciExiXfaEhkH6eWX0ZBubxbEDdJY5i2emlTRbEYTJCaST6Hqp6VK-XezwT6L4tsiZFR4P2-GARdfIeq7AP4-peQNRDnaeB56e7ENapjHGf31JMfw85Hl7EiNBX1sdVDOhvH95CN6hCvB8sI89KQKFv3Y1r4UPUEAQtpp-U9AKWpQC36tdOS9OXdPNTVnsc0G4T2SEdYJ_lX-ANcDtNjrtfcZHwDGBE_BeRG1t0K6vuqz0yXvKzHUXwmNaIl6U8B7QFDCs7YaDHSs_py0003__mC0)
+
+### 2. Xác định các trạng thái
+![Diagram](https://www.planttext.com/api/plantuml/png/T951JWCn34NtEONNIBr05wYYj885gA9bXLYuYPc9wabGua6Qix7WI5o1E9qM2dJx__lEZ_tv_Z7BWadwZitJnJDC9fTmwvXW2clLOOL3YiocYkekIMphGtEDWeNQ9Dyqb8xSYQty7DdsZ5AqmfH49M31ll7RCdFHlN8SYBBvHMfubQAbdFTAHq5o6N3W2Ewf5ZJ_OFkq3-CqsvBTQNX4OGJXZgIDBfk_R2qVIpiISZLP23Zwvnvz84d3ZxOt67HrLnXsy1Zm3JtZrhENmPoYP_zRCLZtLgsNdirtAytesQQ7_SFI1vzRScP6mUbLlm000F__0m00)
+
+### 3. Xác định các thuộc tính
+![Diagram](
+### 4. Xác định các phụ thuộc, quan hệ kết hợp
+
 
